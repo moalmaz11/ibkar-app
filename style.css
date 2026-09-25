@@ -2,11 +2,11 @@
    المتغيرات وألوان الوضع الداكن (Dark Mode)
    ========================================= */
 :root {
-    --bg-base: #0B0F19;        /* كحلي شديد الغمقان (خلفية أساسية) */
-    --bg-surface: #111827;     /* لون الكروت الزجاجية */
+    --bg-base: #0B0F19;
+    --bg-surface: #111827;
     --border-glass: rgba(255, 255, 255, 0.08);
     
-    --primary: #10B981;        /* أخضر زمردي مشرق للوضع الداكن */
+    --primary: #10B981;
     --primary-hover: #059669;
     --primary-glow: rgba(16, 185, 129, 0.2);
     
@@ -27,10 +27,11 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    overflow-x: hidden; /* يمنع تحرك الشاشة يمين/يسار تماماً */
+    overflow-x: hidden;
     background-color: var(--bg-base);
     color: var(--text-pure);
-    font-family: 'Tajawal', sans-serif;
+    /* استخدام الخطوط البديلة للنظام فوراً حتى يكتمل تحميل Tajawal */
+    font-family: 'Tajawal', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
 }
@@ -63,7 +64,8 @@ html, body {
     filter: blur(100px);
     z-index: 0;
     opacity: 0.3;
-    pointer-events: none; /* لمنع التفاعل معها */
+    pointer-events: none;
+    will-change: transform;
 }
 .glow-primary {
     top: -200px;
@@ -84,7 +86,7 @@ html, body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(11, 15, 25, 0.8);
+    background: rgba(11, 15, 25, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-glass);
@@ -106,13 +108,14 @@ html, body {
 }
 
 .brand-logo {
-    width: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-sm);
 }
 
 .brand-text {
     font-size: 1.4rem;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--text-pure);
 }
 
@@ -173,8 +176,8 @@ html, body {
 }
 
 .hero-content h1 {
-    font-size: 3.4rem;
-    font-weight: 900;
+    font-size: 3.2rem;
+    font-weight: 700;
     line-height: 1.3;
     margin-bottom: 24px;
 }
@@ -205,18 +208,18 @@ html, body {
     justify-content: center;
     gap: 12px;
     background-color: var(--primary);
-    color: #022C22; /* لون داكن جداً يبرز على الأخضر */
+    color: #022C22;
     padding: 16px 36px;
     border-radius: 50px;
     font-size: 1.1rem;
-    font-weight: 800;
+    font-weight: 700;
     text-decoration: none;
     box-shadow: 0 10px 25px var(--primary-glow);
     transition: var(--transition);
 }
 
 .btn-primary:hover {
-    background-color: #34D399; /* لون أفتح عند الوقوف */
+    background-color: #34D399;
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(16, 185, 129, 0.3);
 }
@@ -249,9 +252,14 @@ html, body {
 }
 
 .hero-img {
-    width: 260px;
-    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 28px;
     display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
 }
 
 /* =========================================
@@ -269,8 +277,8 @@ html, body {
 }
 
 .section-title h2 {
-    font-size: 2.6rem;
-    font-weight: 900;
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 16px;
 }
 
@@ -321,7 +329,7 @@ html, body {
 
 .glass-card h3 {
     font-size: 1.4rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 16px;
 }
 
@@ -357,8 +365,8 @@ html, body {
 }
 
 .cta-banner h2 {
-    font-size: 2.4rem;
-    font-weight: 900;
+    font-size: 2.2rem;
+    font-weight: 700;
     margin-bottom: 16px;
 }
 
@@ -390,12 +398,11 @@ html, body {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 1.1rem;
 }
 
-.footer-logo img {
-    width: 28px;
+.footer-logo svg {
     border-radius: 6px;
 }
 
@@ -410,10 +417,10 @@ html, body {
    ========================================= */
 .reveal {
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.fade-up { transform: translateY(40px); }
+.fade-up { transform: translateY(30px); }
 
 .reveal.active {
     opacity: 1;
@@ -431,26 +438,24 @@ html, body {
 @media (max-width: 768px) {
     .hidden-mobile { display: none; }
     
-    /* تخفيف الإضاءة في الموبايل لعدم تشتيت العين */
     .glow-bg { opacity: 0.15; }
     
     .hero { padding: 120px 0 60px; text-align: center; }
     .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     
     .hero-content { display: flex; flex-direction: column; align-items: center; }
-    .hero-content h1 { font-size: 2.2rem; }
+    .hero-content h1 { font-size: 2.1rem; }
     .hero-desc { font-size: 1.05rem; margin-bottom: 30px; }
     
     .hero-actions { width: 100%; align-items: center; }
     .btn-primary { width: 100%; justify-content: center; }
     
-    /* منع التفاف معلومات التطبيق */
     .app-specs { justify-content: center; flex-wrap: wrap; gap: 8px; }
     
     .image-glass-container { padding: 15px; }
-    .hero-img { width: 200px; }
+    .hero-img { width: 220px; }
     
-    .section-title h2 { font-size: 2rem; }
+    .section-title h2 { font-size: 1.9rem; }
     
     .features-grid { grid-template-columns: 1fr; }
     .wide-card { grid-column: auto; }
